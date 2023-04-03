@@ -1,0 +1,33 @@
+pipeline {
+    agent any 
+
+    parameters {
+        string(
+            defaultValue: "TEST",
+            description: "input for deployment name",
+            name: "deployment"
+        )
+
+        choice(
+            choices: ["EU-WEST-2A", "EU-WEST-2B", "EU-WEST-2C"],
+            description: "select AZ to deploy to",
+            name: "AZ"
+        )
+
+        booleanParam(
+            defaultValue: false,
+            description: "checkbox to confirm deployment",
+            name: "checkbox"
+        )
+    }
+
+    stages{
+        stage("Demo") {
+            steps {
+                echo "deployment is set to ${params.deployment}"
+                echo "AZ is set to ${params.AZ}"
+                echo "checkbox is set to ${params.checkbox}"
+            }
+        }
+    }
+}

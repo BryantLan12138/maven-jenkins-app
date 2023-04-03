@@ -1,0 +1,27 @@
+pipeline {
+    agent any 
+
+    parameters {
+        booleanParam(
+            defaultValue: false,
+            description: "first bool parameter, let's play with that",
+            name: "myBoolean",
+        )
+    }
+
+    stages {
+        stage("Demo") {
+            steps {
+                script {
+                    if (params.myBoolean == false) {
+                        currentBuild.result = "SUCCESS"
+                        return 
+                    }
+                    else {
+                        echo "booleanParam is set to: true"
+                    }
+                }
+            }
+        }
+    }
+}
